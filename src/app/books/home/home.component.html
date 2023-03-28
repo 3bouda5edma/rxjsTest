@@ -1,0 +1,29 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col" style="padding-bottom: 20px;">
+      <a routerLink="/add" class="btn btn-dark">Add A New Book</a>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let book of books$ | async">
+      <div class="card">
+        <!-- <img src="/assets/book.png" class="card-img-top" alt="..." /> -->
+        <div class="card-body">
+          <h5 class="card-title">{{ book.name }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ book.author }}</li>
+          <li class="list-group-item">${{ book.cost }}</li>
+        </ul>
+        <div class="card-body">
+          <a [routerLink]="['/edit', book.id]" style="margin-right: 20px;" class="btn btn-dark">Edit Book</a>
+          <button class="btn btn-dark" (click)="delete(book.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
