@@ -1,27 +1,50 @@
-# RxjsTest
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Commands
+NgRx Schematics provides scaffolding. NgRx commands get integrated into the Angular CLI, and most of the NgRx elements can be created using angular CLI. So, let's add NgRx Schematics.
+```
+ng add @ngrx/schematics@latest
+```
+## Configure the Schematics so that NgRx commands are available in Angular CLI by default.
+```
+ng config cli.defaultCollection @ngrx/schematics
+```
+## Let’s install the NgRx,  dependencies, and dev-tools now.
+```
+npm install @ngrx/store --save 
+```
+```
+npm install @ngrx/effects --save 
+```
+```
+npm install @ngrx/entity --save 
+```
+```
+npm install @ngrx/store-devtools --save
+```
+## Add an NgRx Store to the App
+```
+ng generate @ngrx/schematics:store State --root --module app.module.ts
+```
+## Create a sub Module for Customer
+```
+ng generate module Customer
+```
+## Create a Customer model
+```
+ng generate class models/customer
+```
+## Add Actions
+```
+ng generate action customer/store/action/Customer
+```
+## Add a Customer Reducer
+```
+ng generate reducer customer/store/reducer/Customer
+```
+## Add Selector
+```
+ng generate selector customer/store/selector/Customer
+```
+## Add a UI Component for View Customers
+```
+ng generate component customer/CustomerView
+```
