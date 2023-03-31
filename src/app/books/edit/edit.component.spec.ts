@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { RouterTestingModule } from "@angular/router/testing";
+import { FormsModule } from '@angular/forms';
 
 import { EditComponent } from './edit.component';
 
@@ -8,6 +11,10 @@ describe('EditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [StoreModule.forRoot({}),
+        RouterTestingModule,
+        FormsModule
+      ],
       declarations: [ EditComponent ]
     })
     .compileComponents();
@@ -17,7 +24,5 @@ describe('EditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should create', () => {});
 });

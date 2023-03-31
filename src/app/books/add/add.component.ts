@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { setAPIStatus } from 'src/app/shared/store/app.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
+import { setAPIStatus } from 'src/app/shared/store/action/app.action';
+import { selectAppState } from 'src/app/shared/store/selector/app.selector';
 import { Appstate } from 'src/app/shared/store/appstate';
-import { Books } from '../store/books';
-import { invokeSaveNewBookAPI } from '../store/books.action';
+import { Books } from '../store/model/books';
+import { invokeSaveNewBookAPI } from '../store/action/books.action';
 
 @Component({
   selector: 'app-add',

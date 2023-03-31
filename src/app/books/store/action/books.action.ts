@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Books } from './books';
+import { Books } from '../model/books';
 
 export class BooksAction{}
 

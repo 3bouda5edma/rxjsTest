@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { EMPTY, map, mergeMap, switchMap, withLatestFrom } from 'rxjs';
-import { setAPIStatus } from 'src/app/shared/store/app.action';
+import { setAPIStatus } from 'src/app/shared/store/action/app.action';
 import { Appstate } from 'src/app/shared/store/appstate';
-import { BooksService } from '../books.service';
+import { BooksService } from '../../books.service';
 import {
   booksFetchAPISuccess,
   deleteBookAPISuccess,
@@ -14,8 +14,8 @@ import {
   invokeUpdateBookAPI,
   saveNewBookAPISucess,
   updateBookAPISucess,
-} from './books.action';
-import { selectBooks } from './books.selector';
+} from '../action/books.action';
+import { selectBooks } from '../selector/books.selector';
 
 
 

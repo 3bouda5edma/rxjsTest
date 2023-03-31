@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { switchMap } from 'rxjs';
-import { setAPIStatus } from 'src/app/shared/store/app.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
+import { setAPIStatus } from 'src/app/shared/store/action/app.action';
+import { selectAppState } from 'src/app/shared/store/selector/app.selector';
 import { Appstate } from 'src/app/shared/store/appstate';
-import { Books } from '../store/books';
-import { invokeUpdateBookAPI } from '../store/books.action';
-import { selectBookById } from '../store/books.selector';
+import { Books } from '../store/model/books';
+import { invokeUpdateBookAPI } from '../store/action/books.action';
+import { selectBookById } from '../store/selector/books.selector';
 
 @Component({
   selector: 'app-edit',

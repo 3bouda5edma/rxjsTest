@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { setAPIStatus } from 'src/app/shared/store/app.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
+import { setAPIStatus } from 'src/app/shared/store/action/app.action';
+import { selectAppState } from 'src/app/shared/store/selector/app.selector';
 import { Appstate } from 'src/app/shared/store/appstate';
 
-import { invokeBooksAPI,invokeDeleteBookAPI  } from '../store/books.action';
-import { selectBooks } from '../store/books.selector';
+import { invokeBooksAPI,invokeDeleteBookAPI  } from '../store/action/books.action';
+import { selectBooks } from '../store/selector/books.selector';
 
 declare var window: any;
 
