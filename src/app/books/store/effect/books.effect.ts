@@ -88,7 +88,7 @@ export class BooksEffect {
           setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' }}));
         return this.booksService.delete(action.id).pipe(map(() => {
             this.appStore.dispatch(setAPIStatus({
-                apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success' }
               }));
             return deleteBookAPISuccess({  id: action.id });
           })

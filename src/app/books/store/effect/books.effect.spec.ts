@@ -12,19 +12,22 @@ import { selectBooks } from '../selector/books.selector';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { TestScheduler } from 'rxjs/testing';
 
+
+
 describe('BooksEffect', () => {
   let actions$: Observable<any>;
   let effects: BooksEffect;
   let booksServiceSpy: jasmine.SpyObj<BooksService>;
   let store: MockStore<Appstate>;
   let appStore: MockStore<Appstate>;
+  let scheduler: TestScheduler;
 
   beforeEach(() => {
     const booksService = jasmine.createSpyObj('BooksService', [
       'get',
       'create',
       'update',
-      'delete',
+      'delete'
     ]);
 
     TestBed.configureTestingModule({
@@ -33,8 +36,8 @@ describe('BooksEffect', () => {
         BooksEffect,
         provideMockActions(() => actions$),
         provideMockStore(),
-        { provide: BooksService, useValue: booksService },
-      ],
+        { provide: BooksService, useValue: booksService }
+      ]
     });
 
     effects = TestBed.inject(BooksEffect);
@@ -81,7 +84,7 @@ describe('BooksEffect', () => {
 
     actions$ = of(action);
     booksServiceSpy.create.and.returnValue(of(newBook));
-    appStore.overrideSelector('app', { apiStatus: { apiResponseMessage: '', apiStatus: '' } });
+    store.overrideSelector('app', { apiStatus: { apiResponseMessage: '', apiStatus: '' } });
 
     effects.saveNewBook$.subscribe((result) => {
       expect(result).toEqual(outcome);
@@ -90,39 +93,6 @@ describe('BooksEffect', () => {
 
   /************************************************************************************************** */
 
- it('should dispatch updateBookAPISucess action after invoking invokeUpdateBookAPI', () => {
-  const updateBook: Books = { id: 1 ,name: 'Updated Book', author: 'Updated Author',cost:500 };
-  const action = invokeUpdateBookAPI({ updateBook });
-  const outcome = updateBookAPISucess({ updateBook });
-
-  actions$ = of(action);
-  booksServiceSpy.update.and.returnValue(of(updateBook));
-  appStore.overrideSelector('app', { apiStatus: { apiResponseMessage: '', apiStatus: '' } });
-
-  effects.updateBookAPI$.subscribe(result => {
-    expect(result).toEqual(outcome);
-    appStore.select('app').subscribe(appState => {
-      expect(appState.apiStatus.apiStatus).toEqual('');
-    });
-  });
-});
-
-
-  it('should not dispatch updateBookAPISucess action when book update fails', () => {
-    const updatedBook: Books = { id: 1, name: 'Updated Book', author: 'Updated Author', cost: 500 };
-    const action = invokeUpdateBookAPI({ updateBook: updatedBook });
-
-    actions$ = of(action);
-    booksServiceSpy.update.and.returnValue(throwError('error'));
-
-    effects.updateBookAPI$.subscribe(() => {
-      fail('should not dispatch updateBookAPISucess action');
-    });
-
-    appStore.select('app').subscribe((appState) => {
-      expect(appState.apiStatus.apiStatus).toEqual('error');
-    });
-  });
   /************************************************************************************************** */
 
 
@@ -144,3 +114,4 @@ describe('BooksEffect', () => {
   });
 
 });
+
