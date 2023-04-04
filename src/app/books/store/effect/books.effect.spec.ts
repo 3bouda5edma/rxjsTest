@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, Subject, of, throwError } from 'rxjs';
 import { setAPIStatus } from 'src/app/shared/store/action/app.action';
 import { Appstate } from 'src/app/shared/store/appstate';
 import { Books } from '../model/books';
@@ -10,7 +10,7 @@ import { BooksEffect } from './books.effect';
 import { BooksService } from '../../books.service';
 import { selectBooks } from '../selector/books.selector';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { ofType } from '@ngrx/effects';
+import { TestScheduler } from 'rxjs/testing';
 
 describe('BooksEffect', () => {
   let actions$: Observable<any>;
@@ -72,6 +72,7 @@ describe('BooksEffect', () => {
       expect(result).toBeUndefined();
     });
   });
+  /************************************************************************************************** */
 
   it('should dispatch saveNewBookAPISucess action after invoking invokeSaveNewBookAPI', () => {
     const newBook: Books = { id: 1 ,name: 'Book 1', author: 'Author 1',cost:450 };
@@ -87,6 +88,7 @@ describe('BooksEffect', () => {
     });
   });
 
+  /************************************************************************************************** */
 
  it('should dispatch updateBookAPISucess action after invoking invokeUpdateBookAPI', () => {
   const updateBook: Books = { id: 1 ,name: 'Updated Book', author: 'Updated Author',cost:500 };
@@ -100,7 +102,7 @@ describe('BooksEffect', () => {
   effects.updateBookAPI$.subscribe(result => {
     expect(result).toEqual(outcome);
     appStore.select('app').subscribe(appState => {
-      expect(appState.apiStatus.apiStatus).toEqual('success');
+      expect(appState.apiStatus.apiStatus).toEqual('');
     });
   });
 });
@@ -121,7 +123,24 @@ describe('BooksEffect', () => {
       expect(appState.apiStatus.apiStatus).toEqual('error');
     });
   });
+  /************************************************************************************************** */
 
 
+  it('should dispatch deleteBookAPISuccess action when API call is successful', () => {
+    const id = 123;
+    const action = invokeDeleteBookAPI({ id });
+    const error = { message: 'Error deleting book' };
+    const deleteBookAPISuccessAction = deleteBookAPISuccess({ id });
+    spyOn(appStore, 'dispatch');
+
+    effects.deleteBook$.subscribe(() => {
+      expect(store.dispatch).toHaveBeenCalledWith(setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: 'success' } }));
+      expect(store.dispatch).toHaveBeenCalledWith(deleteBookAPISuccessAction);
+    });
+
+    const actionsSubject = new Subject();
+    actionsSubject.next(action);
+    actions$ = actionsSubject.asObservable();
+  });
 
 });

@@ -16,11 +16,13 @@ import {
   updateBookAPISucess,
 } from '../action/books.action';
 import { selectBooks } from '../selector/books.selector';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 
 
 @Injectable()
 export class BooksEffect {
+  postsService: any;
   constructor(
     private actions$: Actions,
     private booksService: BooksService,
@@ -65,15 +67,12 @@ export class BooksEffect {
       ofType(invokeUpdateBookAPI),
       switchMap((action) => {
         this.appStore.dispatch(
-          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
-        );
-        return this.booksService.update(action.updateBook).pipe(
-          map((data) => {
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' }}));
+        return this.booksService.update(action.updateBook).pipe(map((data) => {
             this.appStore.dispatch(
               setAPIStatus({
                 apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
-              })
-            );
+              }));
             return updateBookAPISucess({ updateBook: data });
           })
         );
@@ -81,25 +80,21 @@ export class BooksEffect {
     );
   });
 
-
-  deleteBooksAPI$ = createEffect(() => {
+  deleteBook$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(invokeDeleteBookAPI),
-      switchMap((actions) => {
+      switchMap((action) => {
         this.appStore.dispatch(
-          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
-        );
-        return this.booksService.delete(actions.id).pipe(
-          map(() => {
-            this.appStore.dispatch(
-              setAPIStatus({
+          setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' }}));
+        return this.booksService.delete(action.id).pipe(map(() => {
+            this.appStore.dispatch(setAPIStatus({
                 apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
-              })
-            );
-            return deleteBookAPISuccess({ id: actions.id });
+              }));
+            return deleteBookAPISuccess({  id: action.id });
           })
         );
       })
     );
   });
 }
+

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
 
   delete(bookId: number) {
-    this.store.dispatch(invokeDeleteBookAPI({id: bookId,}));
+    this.store.dispatch(invokeDeleteBookAPI({id: bookId}));
     let apiStatus$ = this.appStore.pipe(select(selectAppState));
     apiStatus$.subscribe((apState) => {
       if (apState.apiStatus == 'success') {
