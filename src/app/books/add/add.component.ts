@@ -15,8 +15,8 @@ import { invokeSaveNewBookAPI } from '../store/action/books.action';
 export class AddComponent implements OnInit {
   constructor(
     private store: Store,
-    private appStore: Store<Appstate>,
-    private router: Router
+    public appStore: Store<Appstate>,
+    public router: Router
   ) {}
 
   bookForm: Books = {

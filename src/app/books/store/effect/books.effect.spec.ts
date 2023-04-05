@@ -91,8 +91,7 @@ describe('BooksEffect', () => {
     });
   });
 
-  /************************************************************************************************** 
-
+/****************
   it('should not dispatch updateBookAPISucess action when book update fails', () => {
     const updatedBook: Books = { id: 1, name: 'Updated Book', author: 'Updated Author', cost: 500 };
     const action = invokeUpdateBookAPI({ updateBook: updatedBook });
@@ -108,8 +107,7 @@ describe('BooksEffect', () => {
       expect(appState.apiStatus.apiStatus).toEqual('error');
     });
   });
-  /************************************************************************************************** */
-
+********************/
 
   it('should dispatch deleteBookAPISuccess action when API call is successful', () => {
     const id = 123;
