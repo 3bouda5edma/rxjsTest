@@ -16,7 +16,7 @@ declare var window: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private store: Store, private appStore: Store<Appstate>) {}
+  constructor(private store: Store, public appStore: Store<Appstate>) {}
   books$ = this.store.pipe(select(selectBooks));
   deleteModal: any;
   idToDelete: number = 0;

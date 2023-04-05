@@ -46,6 +46,7 @@ describe('AddComponent', () => {
   });
 
 /*
+
   it('should dispatch invokeSaveNewBookAPI action and navigate to home page on successful API response', () => {
     spyOn(mockStore, 'dispatch').and.callThrough();
     spyOn(component.appStore, 'pipe').and.callThrough();
@@ -54,11 +55,12 @@ describe('AddComponent', () => {
     spyOn(component.appStore, 'select').and.returnValue(mockSelectAppState);
     component.save();
     expect(mockStore.dispatch).toHaveBeenCalledWith(invokeSaveNewBookAPI({ newBook: component.bookForm }));
-    expect(mockStore.dispatch).toHaveBeenCalledWith(setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' }}));
+    expect(mockStore.dispatch).toHaveBeenCalledWith({apiStatus: { apiStatus: '', apiResponseMessage: '' },
+      type: '[API] success or failure status'
+    });
     expect(component.router.navigate).toHaveBeenCalledWith(['/']);
   });
   */
-
 /*
   it('should not navigate to home page when API response is not successful', () => {
     spyOn(mockStore, 'dispatch').and.callThrough();
