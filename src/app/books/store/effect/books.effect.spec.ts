@@ -91,23 +91,7 @@ describe('BooksEffect', () => {
     });
   });
 
-/****************
-  it('should not dispatch updateBookAPISucess action when book update fails', () => {
-    const updatedBook: Books = { id: 1, name: 'Updated Book', author: 'Updated Author', cost: 500 };
-    const action = invokeUpdateBookAPI({ updateBook: updatedBook });
 
-    actions$ = of(action);
-    booksServiceSpy.update.and.returnValue(throwError('error'));
-
-    effects.updateBookAPI$.subscribe(() => {
-      fail('should not dispatch updateBookAPISucess action');
-    });
-
-    appStore.select('app').subscribe((appState) => {
-      expect(appState.apiStatus.apiStatus).toEqual('error');
-    });
-  });
-********************/
 
   it('should dispatch deleteBookAPISuccess action when API call is successful', () => {
     const id = 123;

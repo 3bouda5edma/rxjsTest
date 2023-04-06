@@ -7,33 +7,17 @@ describe('Post Service', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let booksService: BooksService;
   let BOOKS = [
-    {
-      id: 1,
-      name: 'yunis',
-      author: 'fathi',
-      cost:500,
-    },
-    {
-      id: 2,
-      name: 'harry',
-      author: 'ftouh',
-      cost:700,
-    },
-    {
-      id: 3,
-      name: 'soussa',
-      author: 'jaballah',
-      cost:300,
-    },
-  ];
+    {id: 1,name: 'yunis',author: 'fathi',cost:500},
+    {id: 2,name: 'harry',author: 'ftouh',cost:700},
+    {id: 3,name: 'soussa',author: 'jaballah',cost:300}];
+
   beforeEach(() => {
     let httpClientSpyObj = jasmine.createSpyObj('HttpClient', ['get']);
     TestBed.configureTestingModule({
       providers: [
         BooksService,
-        {
-          provide: HttpClient,
-          useValue: httpClientSpyObj,
+        {provide: HttpClient,
+        useValue: httpClientSpyObj,
         },
       ],
     });
@@ -49,10 +33,7 @@ describe('Post Service', () => {
           expect(books).toEqual(BOOKS);
           done();
         },
-        error: () => {
-          done.fail;
-        },
-      });
+        error: () => {done.fail;}});
       expect(httpClientSpy.get).toHaveBeenCalledTimes(1);
     });
   });

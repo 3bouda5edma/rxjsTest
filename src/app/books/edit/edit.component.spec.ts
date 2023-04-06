@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { EditComponent } from './edit.component';
-import { selectBookById } from '../store/selector/books.selector';
 import { invokeUpdateBookAPI } from '../store/action/books.action';
-import { setAPIStatus } from 'src/app/shared/store/action/app.action';
 import { FormsModule } from '@angular/forms';
 import { Books } from '../store/model/books';
 import { of } from 'rxjs';
@@ -56,14 +54,6 @@ describe('EditComponent', () => {
   });
 
 
-/**********
-  it('should set bookForm when book is found', () => {
-    const book: Books = { id: 14, author: 'Author1', name: 'Book1', cost: 10 };
-    const spy = spyOn(store, 'select').and.returnValue(of(book));
-    component.ngOnInit();
-    expect(spy).toHaveBeenCalledWith(selectBookById(14));
-    expect(component.bookForm).toEqual(book);
-  });******/
 
   it('should dispatch the updateBook API and redirect to home when API status is success', () => {
     const book: Books = { id: 14, author: 'Author1', name: 'Book1', cost: 10 };
@@ -74,15 +64,7 @@ describe('EditComponent', () => {
     expect(spy).toHaveBeenCalledWith(invokeUpdateBookAPI({ updateBook: { ...book } }));
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
 });
-/**********
-  it('should dispatch invokeUpdateBookAPI and setAPIStatus actions on update', () => {
-    const updatedBook: Books = { id: 14, author: 'Author1', name: 'Book1', cost: 20 };
-    component.bookForm = updatedBook;
-    component.udapte();
-    const spy = spyOn(store, 'dispatch');
-    const rspy = spyOn(routerSpy, 'navigate')
-    expect(spy).toHaveBeenCalledWith(invokeUpdateBookAPI({ updateBook: updatedBook }));
-    expect(spy).toHaveBeenCalledWith(setAPIStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } }));
-    expect(rspy).toHaveBeenCalledWith(['/']);
-  });*/
+
+
+
 });
